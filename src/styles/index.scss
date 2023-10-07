@@ -1,0 +1,93 @@
+/* Reset default margin, padding, and box-sizing for all elements. */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styles for the widget container. */
+.widget-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Font size for paragraphs within the widget container. */
+  &>p {
+    font-size: 1em;
+  }
+}
+
+/* Styles for the badge container. */
+.badge-container {
+  display: flex;
+  padding: 1em 0 0.5em 0;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1em;
+}
+
+/* Styles for individual badges. */
+.badge {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 35px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5em 0;
+  color: black;
+  background-color: white;
+
+  /* Reset the filter property for badge icons. */
+  .icon {
+    filter: unset;
+  }
+
+  /* Styles for active or hovered badges. */
+  &.active,
+  &:hover {
+    background-color: rgb(44, 41, 41);
+    color: white;
+
+    /* Filter effect for badge icons on active or hovered state. */
+    .icon {
+      filter: invert(100%) sepia(59%) saturate(2%) hue-rotate(133deg) brightness(115%) contrast(100%);
+    }
+  }
+}
+
+/* Styles for the collapsible container. */
+#collapsible {
+  width: 100%;
+  background-color: rgba(209, 209, 209, 0.2);
+  transition: max-height 0.2s ease-out;
+  padding: 0 1em;
+  max-height: 0;
+  overflow: hidden;
+}
+
+/* Styles for titles. */
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles for verifiable information. */
+.verifiable {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+
+  /* Styles for spans within verifiable information. */
+  &>span {
+    font-size: 0.8em;
+    font-style: italic;
+  }
+}
+
+/* Styles for the content within the collapsible container. */
+#collapsible-content {
+  padding: 1em 0 2em 0;
+}

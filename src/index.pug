@@ -1,0 +1,71 @@
+// Include the badge component.
+include ./components/badge.pug
+
+head
+  // Link to the main stylesheet.
+  link(rel='stylesheet', href='styles/index.css')
+
+  script.
+    // Initialize variables for selectedBadge, widgetsData, and icons.
+    let selectedBadge = undefined;
+    let widgetsData = !{JSON.stringify(widgetsData)};
+    let icons = !{JSON.stringify(icons)};
+
+    // Define a function for badge selection.
+    let badgeSelection = (i) => {
+      let coll = document.getElementById("collapsible");
+      let content = document.getElementById("collapsible-content");
+      let title = document.getElementById("badge-title");
+      let desc = document.getElementById("badge-desc");
+
+      // If the selected badge is the same as the clicked badge.
+      if (selectedBadge === i) {
+        // Toggle the active class on the badge and change the arrow icon.
+        document.getElementById(`badge-${i}`).classList.toggle("active");
+        document.getElementById(`icon-arrow-${i}`).innerHTML = icons.arrow_right;
+        selectedBadge = undefined;
+
+        // Reset on the collapsible container the max height.
+        coll.style.maxHeight = null;
+      } else {
+        // If a different badge is selected:
+        if (selectedBadge !== undefined) {
+          // Toggle the active class on the previously selected badge and change the arrow icon.
+          document.getElementById(`badge-${selectedBadge}`).classList.toggle("active");
+          document.getElementById(`icon-arrow-${selectedBadge}`).innerHTML = icons.arrow_right;
+        }
+
+        // Toggle the active class on the clicked badge and change the arrow icon.
+        document.getElementById(`badge-${i}`).classList.toggle("active");
+        document.getElementById(`icon-arrow-${i}`).innerHTML = icons.arrow_down;
+
+        // Update the description and title based on the selected badge data.
+        desc.innerHTML = widgetsData[i].description;
+        title.innerHTML = widgetsData[i].title;
+
+        // Set the max height on the collapsible container to the content's scroll height.
+        coll.classList.toggle("active");
+        coll.style.maxHeight = `${content.scrollHeight}px`;
+        selectedBadge = i;
+      } 
+    };
+
+body(style="height: 100vh;")
+  div(style="display: flex; justify-content: center; height: 100%;")
+    div(style="width: min-content; align-self: center;")
+      .widget-container
+        p
+          | Transparency is an important part of our philosophy which
+          | is why we have partnered with Renoon to provide you with
+          | precise information about our values.
+
+        .badge-container
+          // Iterate over items in widgetsData and render badges, calling the badgeSelection function on click.
+          each item, i in widgetsData
+            +badge(item, i)(onclick=`badgeSelection(${i})`)
+
+        #collapsible
+          #collapsible-content
+            p#badge-title(style="text-align: end; text-transform: uppercase;")
+            br
+            p#badge-desc

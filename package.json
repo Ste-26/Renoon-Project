@@ -1,0 +1,23 @@
+{
+  "name": "renoon-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile-pug": "node index.js dist",
+    "compile-sass": "sass src/styles:dist/styles",
+    "watch-pug": "nodemon src -e pug --exec \"node index.js debug\"",
+    "watch-sass": "sass --watch src/styles:debug/styles",
+    "build": "npm run compile-pug && npm run compile-sass",
+    "dev": "npm run watch-pug & npm run watch-sass"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "sass": "^1.68.0"
+  }
+}

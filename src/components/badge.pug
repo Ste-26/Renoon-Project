@@ -1,0 +1,21 @@
+// Define a mixin for rendering badge components.
+mixin badge(badgeData, i)
+  .badge(id=`badge-${i}` onclick!=attributes.onclick)
+    // Render the badge icon.
+    i.icon(style="width: 2.5em; height: 2.5em; padding: 0 0em;") !{badgeData.icon}
+
+    .title
+      p(style="white-space: nowrap;")= badgeData.title
+
+      span(class='verifiable')
+        // Check if the badge is verifiable and render the appropriate icon and text.
+        if badgeData.verifiable
+          i.icon(style="width: 0.8em; height: 0.8em") !{icons.check_circle}
+          span Verifiable
+        else
+          i.icon(style="width: 0.8em; height: 0.8em") !{icons.hexagon_alert}
+          span Not Verifiable
+
+    // Render the arrow icon for badge expansion.
+    .icon(id=`icon-arrow-${i}` style="width: 2.5em; height: 2.5em") !{icons.arrow_right}
+      
